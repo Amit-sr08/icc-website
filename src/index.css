@@ -1,0 +1,97 @@
+@import 'aos/dist/aos.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --site-bg: #f5efe6; /* warm beige */
+  --brand-dark: #0b0b0b; /* header/footer dark */
+  --brand-muted: #1f2937; /* text dark */
+  --accent-gold: #d4af37; /* gold CTA */
+  --muted-beige: #efe7dc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  background: var(--site-bg);
+  color: var(--brand-muted);
+}
+
+/* Typography: serif headings for a high-end look */
+h1,h2,h3,h4,h5 { font-family: 'Playfair Display', Georgia, serif; color: var(--brand-dark); }
+h1 { font-size: clamp(2.75rem, 5vw, 4.5rem); line-height: 1.02; letter-spacing: -0.02em; font-weight:700; }
+h2 { font-size: clamp(1.75rem, 3.2vw, 2.75rem); line-height: 1.08; font-weight:700; }
+h3 { font-size: 1.25rem; }
+
+/* Subtle page container helper */
+.site-container { max-width: 1200px; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
+
+/* --- Micro-animations & utility helpers --- */
+@keyframes popIn {
+  0% { transform: scale(.96); opacity: 0; }
+  60% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shakeX {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+.anim-pop { animation: popIn 420ms cubic-bezier(.2,.9,.2,1) both; }
+.anim-shake { animation: shakeX 480ms cubic-bezier(.36,.07,.19,.97) both; }
+
+/* subtle glow used on success */
+.glow-success { box-shadow: 0 12px 40px rgba(212,175,55,0.12); border-color: rgba(212,175,55,0.28) !important; }
+/* subtle red ring for error */
+.glow-error { box-shadow: 0 8px 30px rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.6) !important; }
+
+/* Primary CTA — gold pill similar to the design */
+.btn-primary {
+  background: linear-gradient(180deg, rgba(212,175,55,1) 0%, rgba(190,150,40,1) 100%);
+  color: #0b0b0b;
+  font-weight: 700;
+  border-radius: 9999px; /* pill */
+  padding: 0.6rem 1.1rem;
+  box-shadow: 0 8px 30px rgba(20,12,8,0.08), 0 2px 6px rgba(20,12,8,0.04);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(20,12,8,0.12); }
+
+/* small visually-hidden helper for accessibility (if needed) */
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Card helper for consistent panels */
+.card { background: #ffffff; border-radius: 1rem; box-shadow: 0 12px 30px rgba(2,6,23,0.06), 0 2px 6px rgba(2,6,23,0.03); border: 1px solid rgba(15,23,42,0.04); }
+
+/* stroke draw animation for SVG check */
+.anim-draw path { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawStroke 600ms ease-out forwards; }
+@keyframes drawStroke { to { stroke-dashoffset: 0; } }
+
+/* confetti pieces */
+@keyframes confettiFall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; } }
+.confetti-piece { position: absolute; top: -10vh; width: 10px; height: 14px; opacity: 0.95; will-change: transform, opacity; animation-name: confettiFall; animation-duration: 2500ms; animation-timing-function: linear; animation-iteration-count: 1; }
+
+/* Small helpers for header/footer contrast */
+.header-dark { background: var(--brand-dark); color: #efe7dc; }
+.footer-dark { background: var(--brand-dark); color: #d1c7b6; }
+
